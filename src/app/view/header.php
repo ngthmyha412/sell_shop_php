@@ -8,7 +8,17 @@
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
                             <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="login"><i class="fa fa-user"></i> Login</a></li>
+                            <?php 
+                                if(isset($_SESSION['user'])){
+                            ?>
+                            <li><a href="app/controller/LoginController.php?logout"><i class="fa fa-user"></i><?php echo $_SESSION['user']['username']; ?></a></li>
+                            <?php    
+                                }else{
+                            ?>
+                            <li><a href="login"><i class="fa fa-user"></i>Login</a></li>
+                            <?php
+                                }
+                            ?>
                         </ul>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 require("Controller.php");
 include dirname(__DIR__)."/config/db.php";
 include(dirname(__DIR__)."/model/userModel.php");
+session_start();
 
 $login = new Controller();
 
@@ -12,11 +13,13 @@ if(isset($_GET["login"])){
 	if(userModel::user_login($username, $password)){
 		$_SESSION['user']['username']=$username;
 		$_SESSION['user']['password']=$password;
-		header("location:http://localhost/");
-		echo "<script> alert('login success'); </script>";
+		if(isset($_SESSION['user'])) { 
+			header("location: http://localhost/");
+			echo "<script> alert('login success'); </script>";
+		}
 	}
 	else{
-		header("http://localhost/login");
+		header("location: http://localhost/login");
 		echo "<script> alert('user or pass invalid'); </script>";
 		// $login->view("component/login/index");
 	}
@@ -38,14 +41,17 @@ else if(isset($_GET["register"])){
 		echo "<script> alert('register success'); </script>";
 	}
 	else{
-		header("http://localhost/login");
+		header("location: http://localhost/login");
 		echo "<script> alert('false'); </script>";
 		// $login->view("component/login/index");
 	}
+}
+else if(isset($_GET["logout"])){
+	session_destroy();
+	header("location: http://localhost/");
 }
 else{
 	echo "<script> alert('user or pass invalid'); </script>";
 	// $login->view("component/login/index");
 }
-
 ?>

@@ -1,0 +1,1 @@
+<?php require("/app/controller/LoginControllẻ.php?logout"); ?>
