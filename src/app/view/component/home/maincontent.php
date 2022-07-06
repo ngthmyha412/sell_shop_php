@@ -12,7 +12,7 @@
                                     <img src="public/img/products/<?php echo $value['img']; ?>" alt="" style="height:240px; width: auto;">
                                     <div class="product-hover">
                                         <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        <a href="app/controller/HomeController.php?alias=<?php echo $value['alias']; ?>" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                     </div>
                                 </div>
                                 

@@ -1,48 +1,51 @@
 <?php
 
 require("Controller.php");
-include("app/config/db.php");
-include('app/model/userModel.php');
+include dirname(__DIR__)."/config/db.php";
+include(dirname(__DIR__)."/model/userModel.php");
 
 $login = new Controller();
 
-$action=filter_input(INPUT_POST,'action');
-if(empty($action)){
-	$action =filter_input(INPUT_GET,'action');
-	if(empty($action)){
-		$action='check_login';
+if(isset($_GET["login"])){
+	$username =$_POST["username"];
+	$password=md5($_POST["password"]);
+	if(userModel::user_login($username, $password)){
+		$_SESSION['user']['username']=$username;
+		$_SESSION['user']['password']=$password;
+		header("location:http://localhost/");
+		echo "<script> alert('login success'); </script>";
+	}
+	else{
+		header("http://localhost/login");
+		echo "<script> alert('user or pass invalid'); </script>";
+		// $login->view("component/login/index");
 	}
 }
-switch ($action) {
-	case 'check_login':
-		if(isset($_SESSION['user'])){
-			$login->view("component/home/index");
-		}
-		else{
-			$action='login';
-			$login->view("component/login/index");
-		}
-		break;
-	case 'login':
-		$username =filter_input(INPUT_POST,'username');
-		$password=md5(filter_input(INPUT_POST,'password'));
-		$user=array('username'=>$username,'password'=>$password);
-		if(userModel::user_login($user)){
-			$_SESSION['user']['username']=$username;
-			$_SESSION['user']['password']=$password;
-			echo " login sussess";
-			$login->view("component/home/index");
-		}
-		else{
-			echo "user or pass invalid";
-			$login->view("component/home/index");
-		}
-		break;
-	case 'logout':
-		unset($_SESSION['admin']);
-		$login->view("component/home/index");
-		break;
-	default:
-		break;
+else if(isset($_GET["register"])){
+	$newuser =[
+		'',
+		$_POST["fullname"],
+		$_POST["username"], 
+		md5($_POST["password"]),
+		$_POST["role"],
+		$_POST["email"],
+		$_POST["phone"],
+		$_POST["address"],
+		$_POST["img"]
+	];
+	if(userModel::user_register($newuser)){
+		header("location:http://localhost/login");
+		echo "<script> alert('register success'); </script>";
+	}
+	else{
+		header("http://localhost/login");
+		echo "<script> alert('false'); </script>";
+		// $login->view("component/login/index");
+	}
 }
+else{
+	echo "<script> alert('user or pass invalid'); </script>";
+	// $login->view("component/login/index");
+}
+
 ?>

@@ -8,7 +8,11 @@ class Controller
 
     function view($view)
     {
-        include('app/view/'.$view.'.php');
+        include(dirname(__DIR__)."/view/$view.php");
+    }
+    function viewOne($view)
+    {
+        include_once(dirname(__DIR__).'app/view/'.$view.'.php');
     }
 }
 ?>

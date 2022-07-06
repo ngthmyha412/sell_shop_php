@@ -37,16 +37,22 @@
         
         switch($_SERVER['REQUEST_URI']){
             case '/':
-                require("app/controller/homeController.php");
+                require("app/controller/HomeController.php");
                 break;
             case '/cart':
                 require("app/view/component/cart/index.php");
                 break;
             case '/login':
-                require("app/controller/loginController.php");
+                require("app/view/component/login/index.php");
+                break;
+            case '/register':
+                require("app/view/component/login/register.php");
                 break;
             case '/detail':
                 require("app/view/component/single-product/index.php");
+                break;
+            case '/admin/product':
+                require("app/view/admin/product.php");
                 break;
         }
         require("app/view/footer.php");

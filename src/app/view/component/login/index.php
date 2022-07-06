@@ -9,24 +9,24 @@
                 </div>
                 
                 <div class="panel-body">
-                <form action="/login/check_login" method="post">
+                <form action="app/controller/LoginController.php?login" method="post" >
                     <div class="form-group">
-                    <label for="uname" class="uname-title"></label>
-                    <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" id="uname" name="username" class="form-control" placeholder="User Name">
-                    </div> 
-                </div>
-                
-                <div class="form-group">
-                    <label for="passwd" class="passwd-title"></label>
-                    <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="fa fa-lock"></i>
-                    </span>
-                    <input type="password" id="passwd" name="password" class="form-control" placeholder="Password">
+                        <label for="uname" class="uname-title"></label>
+                        <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" id="uname" name="username" class="form-control" placeholder="User Name">
+                        </div> 
                     </div>
-                </div>
+                
+                    <div class="form-group">
+                        <label for="passwd" class="passwd-title"></label>
+                        <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <input type="password" id="passwd" name="password" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
                     <input type="submit" id="login-btn" value="LOGIN" class="btn btn-primary">
                     <a href="/signup" class="btn btn-default" id="signup-btn">SignUp</a>
                 </form>

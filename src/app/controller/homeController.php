@@ -1,9 +1,9 @@
 <?php
 
 require("Controller.php");
-include("app/config/db.php");
-include('app/model/productModel.php');
-include('app/model/categoryModel.php');
+include(dirname(__DIR__)."/config/db.php");
+include(dirname(__DIR__).'/model/productModel.php');
+include(dirname(__DIR__).'/model/categoryModel.php');
 
 $home = new Controller();
 
@@ -28,5 +28,8 @@ switch ($action) {
 	default:
 		# code...
 	    break;
+}
+if(isset($_GET['alias'])){
+    $home->view("component/single-product/index");
 }
 ?>
